@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace GameExample.Game
+namespace GameExample.Core
 {
-    public interface GameState
+    public interface IGameState
     {
-        GameState HandleInput(Game game);
+        IGameState HandleInput(Game game, Input input);
         void Initialize(Game game);
     }
 

@@ -3,21 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace GameExample.Game
+namespace GameExample.Core
 {
     public class Game
     {
-        public GameState State { get; private set; }
-        public List<int> Hand { get; set; }
+        public int GameId { get; set; }
+        public IGameState State { get; private set; }
+        public Player Player { get; set; }
+        public List<int> DealerHand { get; set; }
         public Random RandomGenerator = new Random();
 
-        public void HandleInput()
+        public void HandleInput(Input input)
         {
-            GameState newState = State.HandleInput(this);
+            IGameState newState = State.HandleInput(this, input);
             if (newState != null)
             {
                 // TODO: destroy current State?
                 State = newState;
+                State.Initialize(this);
             }
         }
 
